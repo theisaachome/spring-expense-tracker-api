@@ -31,7 +31,7 @@ public class TransactionMapper implements EntityMapper<Transaction, TransactionR
                 entity.getUser().getId(),
                 entity.getAccount().getId(),
                 entity.getCategory().getId(),
-                entity.getBudget().getId(),
+                (entity.getBudget() != null) ? entity.getBudget().getId() : null,
                 entity.getCreatedDate(),
                 entity.getLastModifiedDate(),
                 entity.getCreatedBy(),

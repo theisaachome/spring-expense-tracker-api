@@ -40,7 +40,7 @@ public class Transaction  extends  BaseEntity {
     private Category category;
 
     @ManyToOne()
-    @JoinColumn(name = "budget_id",nullable = false)
+    @JoinColumn(name = "budget_id")
     private Budget budget;
 
 }
