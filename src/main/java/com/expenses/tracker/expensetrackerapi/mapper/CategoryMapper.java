@@ -18,6 +18,7 @@ public class CategoryMapper implements EntityMapper<Category, CategoryRequestDto
     @Override
     public CategoryResponseDto toResponseDto(Category entity) {
         return new CategoryResponseDto(
+                entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
                 entity.getUser().getId(),

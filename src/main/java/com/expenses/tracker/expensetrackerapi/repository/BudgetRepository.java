@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BudgetRepository extends JpaRepository<Budget, Long> {
     List<Budget> findByUserId(Long userId);
+    void deleteByUserId(Long userId);
 }

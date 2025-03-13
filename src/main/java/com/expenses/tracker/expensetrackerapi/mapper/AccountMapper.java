@@ -24,13 +24,11 @@ public class AccountMapper implements  EntityMapper<Account, AccountRequestDto,A
                 entity.getType(),
                 entity.getBalance(),
                 entity.getUser().getId(),
-                new BaseResponse(
                         entity.getCreatedDate(),
                         entity.getLastModifiedDate(),
                         entity.getCreatedBy(),
                         entity.getLastModifiedBy(),
                         entity.getIsActive(),
-                        entity.getVersion()
-                ));
+                        entity.getVersion());
     }
 }

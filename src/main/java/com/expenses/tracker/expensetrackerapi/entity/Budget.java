@@ -2,6 +2,7 @@ package com.expenses.tracker.expensetrackerapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "budgets")
 public class Budget  extends   BaseEntity{
@@ -30,4 +32,13 @@ public class Budget  extends   BaseEntity{
 
     @OneToMany(mappedBy = "budget")
     List<Transaction> transactions;
+
+    public Budget(String name, String description, BigDecimal budgetLimit, LocalDate periodStart, LocalDate periodEnd, User user) {
+        this.name = name;
+        this.description = description;
+        this.budgetLimit = budgetLimit;
+        this.periodStart = periodStart;
+        this.periodEnd = periodEnd;
+        this.user = user;
+    }
 }
