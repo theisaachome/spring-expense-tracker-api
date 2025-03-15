@@ -8,6 +8,7 @@ import com.expenses.tracker.expensetrackerapi.mapper.AccountMapper;
 import com.expenses.tracker.expensetrackerapi.repository.AccountRepository;
 import com.expenses.tracker.expensetrackerapi.repository.UserRepo;
 import com.expenses.tracker.expensetrackerapi.service.impl.BaseServiceImpl;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +24,7 @@ public class AccountService extends BaseServiceImpl<Account,Long, AccountRequest
         this.userRepo = userRepo;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public AccountResponseDto save(AccountRequestDto dto) {
         var user = userRepo.findById(dto.userId())

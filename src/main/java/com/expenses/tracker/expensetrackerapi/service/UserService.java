@@ -51,7 +51,7 @@ public class UserService extends BaseServiceImpl<User,Long, UserRequestDto,UserR
         createSampleDataForUser(entity);
     }
 
-    private void createSampleDataForUser(User user) {
+    public void createSampleDataForUser(User user) {
         // Sample Accounts
         List<Account> sampleAccounts = List.of(
                 new Account("Touch & Go", "E-Wallet", new BigDecimal("100.00"), user),

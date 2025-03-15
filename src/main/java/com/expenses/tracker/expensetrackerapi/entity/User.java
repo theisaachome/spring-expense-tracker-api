@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,4 +29,11 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Category> categories;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id") ,
+            inverseJoinColumns = @JoinColumn(name="role_id",referencedColumnName = "id")
+    )
+    private Set<Roles> roles = new HashSet<>();
 }
