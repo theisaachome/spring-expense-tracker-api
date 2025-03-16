@@ -1,7 +1,9 @@
 package com.expenses.tracker.expensetrackerapi.security;
 
+import com.expenses.tracker.expensetrackerapi.exception.ApplicationAPIException;
 import com.expenses.tracker.expensetrackerapi.exception.ResourceNotFoundException;
 import com.expenses.tracker.expensetrackerapi.repository.UserRepo;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+//        var user = userRepository.findByUsernameOrEmail(usernameOrEmail,usernameOrEmail)
+//                .orElseThrow(()->new ResourceNotFoundException("User not found with email Or username "+usernameOrEmail));
+
         var user = userRepository.findByUsernameOrEmail(usernameOrEmail,usernameOrEmail)
-                .orElseThrow(()->new ResourceNotFoundException("User not found with email Or username "+usernameOrEmail));
+                .orElseThrow(()->new ApplicationAPIException(HttpStatus.UNAUTHORIZED,"Invalid Credentials"));
         Set<GrantedAuthority> grantedAuthorities =
                 user.getRoles()
                         .stream()

@@ -31,14 +31,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         }
 
+//    @ExceptionHandler(ApplicationAPIException.class)
+//    public ResponseEntity<ErrorDetails> handleApplicationAPIException(ApplicationAPIException exception,
+//                                                               WebRequest webRequest){
+//        ErrorDetails errorDetails = new ErrorDetails();
+//        errorDetails.setMessage(exception.getMessage());
+//        errorDetails.setTimestamp(LocalDateTime.now());
+//        errorDetails.setDetails(webRequest.getDescription(false));
+//        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+//    }
     @ExceptionHandler(ApplicationAPIException.class)
-    public ResponseEntity<ErrorDetails> handleApplicationAPIException(ApplicationAPIException exception,
-                                                               WebRequest webRequest){
+    public ResponseEntity<ErrorDetails> handleApplicationAPIException(ApplicationAPIException exception, WebRequest webRequest) {
         ErrorDetails errorDetails = new ErrorDetails();
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDetails(webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(errorDetails, exception.getStatus());
     }
 
     // global exceptions

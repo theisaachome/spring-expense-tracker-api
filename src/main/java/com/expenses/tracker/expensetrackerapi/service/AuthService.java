@@ -8,6 +8,7 @@ import com.expenses.tracker.expensetrackerapi.exception.ApplicationAPIException;
 import com.expenses.tracker.expensetrackerapi.repository.RoleRepository;
 import com.expenses.tracker.expensetrackerapi.repository.UserRepo;
 import com.expenses.tracker.expensetrackerapi.security.CustomUserDetailsService;
+import com.expenses.tracker.expensetrackerapi.security.JwtTokenProvider;
 import com.expenses.tracker.expensetrackerapi.service.impl.BaseServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,19 +30,22 @@ public class AuthService  {
     private final UserService userService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public AuthService(CustomUserDetailsService customUserDetailsService,
                        AuthenticationManager authenticationManager,
                        UserRepo userRepo,
                        UserService userService,
                        RoleRepository roleRepository,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       JwtTokenProvider jwtTokenProvider) {
         this.customUserDetailsService = customUserDetailsService;
         this.authenticationManager = authenticationManager;
         this.userRepo = userRepo;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.jwtTokenProvider=jwtTokenProvider;
     }
 
     public String login(LoginRequestDto dto){
@@ -52,7 +56,8 @@ public class AuthService  {
                             dto.password())
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return "User logged in Successfully!";
+            String token = jwtTokenProvider.generateToken(authentication);
+            return token;
         } catch (Exception e) {
             return "Login failed: " + e.getMessage(); // Log or return a proper error response
         }

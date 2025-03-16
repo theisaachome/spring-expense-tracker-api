@@ -2,6 +2,7 @@ package com.expenses.tracker.expensetrackerapi.controller;
 
 import com.expenses.tracker.expensetrackerapi.dto.request.LoginRequestDto;
 import com.expenses.tracker.expensetrackerapi.dto.request.SignupRequestDto;
+import com.expenses.tracker.expensetrackerapi.dto.response.JWTAuthResponse;
 import com.expenses.tracker.expensetrackerapi.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,9 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto dto) {
-        String result = authService.login(dto);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginRequestDto dto) {
+        String token = authService.login(dto);
+        return new ResponseEntity<>(new JWTAuthResponse(token), HttpStatus.OK);
     }
 
     @PostMapping(value = {"/signup","/register"})
