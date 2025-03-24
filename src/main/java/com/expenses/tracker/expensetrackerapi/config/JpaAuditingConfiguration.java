@@ -16,7 +16,6 @@ public class JpaAuditingConfiguration {
     public AuditorAware<String> auditorProvider() {
         return ()->{
 //            var authentication = SecurityContextHolder
-
             return Optional.of("System");
         };
     }
