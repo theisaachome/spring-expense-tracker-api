@@ -2,7 +2,6 @@ package com.expenses.tracker.expensetrackerapi.mapper;
 
 import com.expenses.tracker.expensetrackerapi.dto.request.AccountRequestDto;
 import com.expenses.tracker.expensetrackerapi.dto.response.AccountResponseDto;
-import com.expenses.tracker.expensetrackerapi.dto.response.BaseResponse;
 import com.expenses.tracker.expensetrackerapi.entity.Account;
 import org.springframework.stereotype.Component;
 
