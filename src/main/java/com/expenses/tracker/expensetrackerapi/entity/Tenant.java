@@ -14,9 +14,9 @@ public class Tenant extends BaseEntity {
     private String phone;
     private String emergencyContactPhone;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bedId",nullable = false)
-    private Bed bed;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "bedId",nullable = false)
+//    private Bed bed;
     @OneToOne(mappedBy = "tenant",cascade = CascadeType.ALL,orphanRemoval = true)
     private Address address;
 }
