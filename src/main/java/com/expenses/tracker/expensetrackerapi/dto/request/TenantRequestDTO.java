@@ -5,6 +5,7 @@ public record TenantRequestDTO(
         String email,
         String phone,
         String emergencyContactPhone,
+        Integer bedId,
         String address1,
         String address2,
         String city,

@@ -1,7 +1,6 @@
 package com.expenses.tracker.expensetrackerapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +13,10 @@ public class Tenant extends BaseEntity {
     private String email;
     private String phone;
     private String emergencyContactPhone;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bedId",nullable = false)
+    private Bed bed;
+    @OneToOne(mappedBy = "tenant",cascade = CascadeType.ALL,orphanRemoval = true)
+    private Address address;
 }
