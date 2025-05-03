@@ -30,6 +30,7 @@ public abstract class AbstractController<T,ID,RequestDto,ResponseDto> {
     public ResponseEntity<List<ResponseDto>> getAll() {
         return ResponseEntity.ok(baseService.findAll());
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable ID id) {
         baseService.delete(id);
